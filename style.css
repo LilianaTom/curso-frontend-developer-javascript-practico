@@ -285,7 +285,7 @@ aside {
   top: 24px;
   left: 24px;
   z-index: 2;
-  padding: 12px;
+  padding: 12px;  
   border-radius: 50%;
 }
 .product-detail-close:hover {

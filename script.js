@@ -5,10 +5,13 @@ const menuIcon = document.querySelector('.menu');
 const shoppingCart = document.querySelector('.navbar-shopping-cart');
 const shoppingCartConytainer = document.querySelector('#shoppingCartConytainer');
 const cardsContainer = document.querySelector('.cards-container');
+const productDetailContainer = document.querySelector('#product-detail');
+const productDetailIcon = document.querySelector('.product-detail-close');
 
 menuEmail.addEventListener('click',toggleDesktopMenu);
 menuIcon.addEventListener('click',toggleMobileMenu);
 shoppingCart.addEventListener('click',toggleCartAside);
+productDetailIcon.addEventListener('click',closeProductDetailAside);
 
 function toggleDesktopMenu(){
     const isAsideMenuClosed = shoppingCartConytainer.classList.contains('inactive');   
@@ -25,7 +28,7 @@ function toggleMobileMenu(){
     if(!isAsideMenuClosed){
         shoppingCartConytainer.classList.add('inactive');
     }
-
+    closeProductDetailAside();
     mobileMenu.classList.toggle('inactive');
 }
 
@@ -35,10 +38,23 @@ function toggleCartAside(){
     if(!isMobileMenuClosed){
         mobileMenu.classList.add('inactive');
     }
+    const isproductDetailClosed = productDetailContainer.classList.contains('inactive');   
+    
+    if(!isproductDetailClosed){
+        productDetailContainer.classList.add('inactive');
+    }
 
     shoppingCartConytainer.classList.toggle('inactive');    
 }
 
+function openProductDetailAside(){
+    shoppingCartConytainer.classList.add('inactive');
+    productDetailContainer.classList.remove('inactive');
+}
+
+function closeProductDetailAside(){
+    productDetailContainer.classList.add('inactive');
+}
 const productList=[];
 productList.push({
     name: 'Bike',
@@ -55,6 +71,8 @@ productList.push({
     price: 420,
     imagen: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 });
+
+
 function renderProduct(arr){
     for(const product of productList){
         const productCard = document.createElement('div');
@@ -62,7 +80,7 @@ function renderProduct(arr){
     
         const  productImg = document.createElement('img');
         productImg.setAttribute('src',product.imagen);
-        
+        productImg.addEventListener('click',openProductDetailAside);
     
         const productInfo= document.createElement('div');
         productInfo.classList.add('product-info');
